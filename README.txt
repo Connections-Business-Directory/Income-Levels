@@ -18,7 +18,7 @@ What does this plugin do? It adds the ability to add a income level to entries.
 
 The income level of an entry can optionally be shown as a content block within a template or with the supplied widget.
 
-[Checkout the screenshots.](http://connections-pro.com/)
+[Checkout the screenshots.](http://connections-pro.com/add-on/income-level/)
 
 Here are a couple other great extensions that enhance your expirence with the Connections Business Directory:
 * [Business Hours](http://wordpress.org/plugins/connections-business-directory-hours/)
@@ -34,7 +34,7 @@ None yet....
 
 == Screenshots ==
 
-[Screenshots can be found here.](http://connections-pro.com/)
+[Screenshots can be found here.](http://connections-pro.com/add-on/income-level/)
 
 == Changelog ==
 
