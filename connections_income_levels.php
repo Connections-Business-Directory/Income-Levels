@@ -1,7 +1,6 @@
 <?php
 /**
- * An extension for the Connections plugin which adds a metabox for
- * income levels.
+ * An extension for the Connections plugin which adds a metabox for income levels.
  *
  * @package   Connections Income Levels
  * @category  Extension
@@ -53,9 +52,10 @@ if ( ! class_exists('Connections_Income_Levels') ) {
 			add_action( 'cn_metabox', array( __CLASS__, 'registerMetabox') );
 
 			// Add the business hours option to the admin settings page.
+			// This is also required so it'll be rendered by $entry->getContentBlock( 'income_level' ).
 			add_filter( 'cn_content_blocks', array( __CLASS__, 'settingsOption') );
 
-			// Add the action that'll be run when calling $entry->getContentBlock( 'business_hours' ) from within a template.
+			// Add the action that'll be run when calling $entry->getContentBlock( 'income_level' ) from within a template.
 			add_action( 'cn_output_meta_field-income_levels', array( __CLASS__, 'block' ), 10, 4 );
 
 			// Register the widget.
@@ -66,6 +66,7 @@ if ( ! class_exists('Connections_Income_Levels') ) {
 		 * Define the constants.
 		 *
 		 * @access  private
+		 * @static
 		 * @since  1.0
 		 * @return void
 		 */
@@ -78,6 +79,14 @@ if ( ! class_exists('Connections_Income_Levels') ) {
 			define( 'CNIL_URL', plugin_dir_url( __FILE__ ) );
 		}
 
+		/**
+		 * The widget.
+		 *
+		 * @access private
+		 * @since  1.0
+		 * @static
+		 * @return void
+		 */
 		private static function loadDependencies() {
 
 			require_once( CNIL_PATH . 'includes/class.widgets.php' );
@@ -99,12 +108,13 @@ if ( ! class_exists('Connections_Income_Levels') ) {
 		 * Credit: Adapted from Ninja Forms / Easy Digital Downloads.
 		 *
 		 * @access private
-		 * @since 1.0
-		 * @uses apply_filters()
-		 * @uses get_locale()
-		 * @uses load_textdomain()
-		 * @uses load_plugin_textdomain()
-		 * @return (void)
+		 * @since  1.0
+		 * @static
+		 * @uses   apply_filters()
+		 * @uses   get_locale()
+		 * @uses   load_textdomain()
+		 * @uses   load_plugin_textdomain()
+		 * @return void
 		 */
 		public static function loadTextdomain() {
 
@@ -130,7 +140,16 @@ if ( ! class_exists('Connections_Income_Levels') ) {
 			load_plugin_textdomain( $textdomain, FALSE, $languagesDirectory );
 		}
 
-		public static function levels() {
+		/**
+		 * Defines the income level options.
+		 *
+		 * @access private
+		 * @since  1.0
+		 * @static
+		 * @uses   apply_filters()
+		 * @return array An indexed array containing the income levels.
+		 */
+		private static function levels() {
 
 			$options = array(
 				'0'   => __( 'Under $5,000', 'connections_income_levels'),
@@ -180,7 +199,17 @@ if ( ! class_exists('Connections_Income_Levels') ) {
 			return apply_filters( 'cn_income_level_options', $options );
 		}
 
-		public static function income( $level ) {
+		/**
+		 * Return the income level based on the supplied key.
+		 *
+		 * @access private
+		 * @since  1.0
+		 * @static
+		 * @uses   levels()
+		 * @param  string $level The key of the income level to return.
+		 * @return mixed         bool | string	The incomes level if found, if not, FALSE.
+		 */
+		private static function income( $level = '' ) {
 
 			if ( ! is_string( $level ) || empty( $level ) ) {
 
@@ -193,6 +222,16 @@ if ( ! class_exists('Connections_Income_Levels') ) {
 			return $income;
 		}
 
+		/**
+		 * Registered the custom metabox.
+		 *
+		 * @access private
+		 * @since  1.0
+		 * @static
+		 * @uses   levels()
+		 * @uses   cnMetaboxAPI::add()
+		 * @return void
+		 */
 		public static function registerMetabox() {
 
 			$atts = array(
@@ -213,6 +252,15 @@ if ( ! class_exists('Connections_Income_Levels') ) {
 			cnMetaboxAPI::add( $atts );
 		}
 
+		/**
+		 * Add the custom meta as an option in the content block settings in the admin.
+		 * This is required for the output to be rendered by $entry->getContentBlock().
+		 *
+		 * @access private
+		 * @since  1.0
+		 * @param  array  $blocks An associtive array containing the registered content block settings options.
+		 * @return array
+		 */
 		public static function settingsOption( $blocks ) {
 
 			$blocks['income_levels'] = 'Income Level';
@@ -227,6 +275,9 @@ if ( ! class_exists('Connections_Income_Levels') ) {
 		 *
 		 * @access  private
 		 * @since  1.0
+		 * @static
+		 * @uses   esc_attr()
+		 * @uses   income()
 		 * @param  string $id    The field id.
 		 * @param  array  $value The income level ID.
 		 * @param  array  $atts  The shortcode atts array passed from the calling action.
@@ -250,7 +301,7 @@ if ( ! class_exists('Connections_Income_Levels') ) {
 	 * @access public
 	 * @since 1.0
 	 *
-	 * @return mixed (object)|(bool)
+	 * @return mixed object | bool
 	 */
 	function Connections_Income_Levels() {
 
@@ -260,15 +311,15 @@ if ( ! class_exists('Connections_Income_Levels') ) {
 
 			} else {
 
-					add_action(
-							'admin_notices',
-							 create_function(
-									 '',
-									'echo \'<div id="message" class="error"><p><strong>ERROR:</strong> Connections must be installed and active in order use Connections Income Levels.</p></div>\';'
-									)
-					);
+				add_action(
+					'admin_notices',
+					 create_function(
+						 '',
+						'echo \'<div id="message" class="error"><p><strong>ERROR:</strong> Connections must be installed and active in order use Connections Income Levels.</p></div>\';'
+						)
+				);
 
-					return FALSE;
+				return FALSE;
 			}
 	}
 
