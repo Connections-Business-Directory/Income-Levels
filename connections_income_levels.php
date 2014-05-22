@@ -13,7 +13,7 @@
  * Plugin Name:       Connections Incomes Levels
  * Plugin URI:        http://connections-pro.com
  * Description:       An extension for the Connections plugin which adds a metabox for income levels.
- * Version:           1.0
+ * Version:           1.0.1
  * Author:            Steven A. Zahm
  * Author URI:        http://connections-pro.com
  * License:           GPL-2.0+
@@ -72,7 +72,7 @@ if ( ! class_exists('Connections_Income_Levels') ) {
 		 */
 		private static function defineConstants() {
 
-			define( 'CNIL_CURRENT_VERSION', '1.0' );
+			define( 'CNIL_CURRENT_VERSION', '1.0.1' );
 			define( 'CNIL_DIR_NAME', plugin_basename( dirname( __FILE__ ) ) );
 			define( 'CNIL_BASE_NAME', plugin_basename( __FILE__ ) );
 			define( 'CNIL_PATH', plugin_dir_path( __FILE__ ) );
