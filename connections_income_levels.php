@@ -212,7 +212,7 @@ if ( ! class_exists('Connections_Income_Levels') ) {
 		 */
 		private static function income( $level = '' ) {
 
-			if ( ! is_string( $level ) ) {
+			if ( ! is_string( $level ) || empty( $level ) || $level === '-1' ) {
 
 				return FALSE;
 			}
