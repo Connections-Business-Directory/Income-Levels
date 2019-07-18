@@ -160,7 +160,7 @@ if ( ! class_exists('Connections_Income_Levels') ) {
 				'50'  => __( '$50,000 to $54,999', 'connections_income_levels'),
 				'55'  => __( '$55,000 to $59,999', 'connections_income_levels'),
 				'60'  => __( '$60,000 to $64,999', 'connections_income_levels'),
-				'75'  => __( '$65,000 to $69,999', 'connections_income_levels'),
+				'65'  => __( '$65,000 to $69,999', 'connections_income_levels'),
 				'70'  => __( '$70,000 to $74,999', 'connections_income_levels'),
 				'75'  => __( '$75,000 to $79,999', 'connections_income_levels'),
 				'80'  => __( '$80,000 to $84,999', 'connections_income_levels'),
