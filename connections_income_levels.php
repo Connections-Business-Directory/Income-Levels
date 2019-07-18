@@ -271,16 +271,12 @@ if ( ! class_exists('Connections_Income_Levels') ) {
 		 *
 		 * Called by the cn_meta_output_field-income_level action in cnOutput->getMetaBlock().
 		 *
-		 * @access  private
+		 * @access private
 		 * @since  1.0
-		 * @static
-		 * @uses   esc_attr()
-		 * @uses   income()
+
 		 * @param  string $id    The field id.
 		 * @param  array  $value The income level ID.
 		 * @param  array  $atts  The shortcode atts array passed from the calling action.
-		 *
-		 * @return string
 		 */
 		public static function block( $id, $value, $object = NULL, $atts ) {
 
@@ -288,7 +284,6 @@ if ( ! class_exists('Connections_Income_Levels') ) {
 
 				printf( '<div class="cn-income-level">%1$s</div>', esc_attr( $income ) );
 			}
-
 		}
 
 	}
