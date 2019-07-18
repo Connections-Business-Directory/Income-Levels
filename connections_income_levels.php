@@ -92,15 +92,9 @@ if ( ! class_exists('Connections_Income_Levels') ) {
 			require_once( CNIL_PATH . 'includes/class.widgets.php' );
 		}
 
+		public static function activate() {}
 
-		public static function activate() {
-
-
-		}
-
-		public static function deactivate() {
-
-		}
+		public static function deactivate() {}
 
 		/**
 		 * Load the plugin translation.
