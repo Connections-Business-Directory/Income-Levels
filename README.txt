@@ -65,6 +65,17 @@ None yet....
 [Screenshots can be found here.](http://connections-pro.com/add-on/income-level/)
 
 == Changelog ==
+
+= 2.0 07/18/2019 =
+* FEATURE: Add support for CSV Import and Export of Education Level.
+* TWEAK: Refactor plugin in singleton pattern.
+* OTHER: Remove extra line return.
+* OTHER: Set version as class constant.
+* OTHER: Use static method to register widget instead of deprecated function `create_function()`.
+* OTHER: Remove use of deprecated function `create_function()` when initiating the plugin.
+* DEV: Update plugin header.
+* DEV: phpDoc corrections.
+
 = 1.0.2 08/19/2014 =
 * BUG: Do not display "Choose..." in the entry content when no level was chosen for the entry.
 
@@ -78,3 +89,6 @@ None yet....
 
 = 1.0 =
 Initial release.
+
+= 2.0 =
+It is recommended to backup before updating. Requires WordPress >= 4.7.12 and PHP >= 5.6.20 PHP version >= 7.1 recommended.
