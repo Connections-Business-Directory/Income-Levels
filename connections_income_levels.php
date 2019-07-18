@@ -33,22 +33,131 @@ if ( ! class_exists('Connections_Income_Levels') ) {
 
 		const VERSION = '1.0.2';
 
-		public function __construct() {
+		/**
+		 * @var Connections_Income_Levels Stores the instance of this class.
+		 *
+		 * @access private
+		 * @since 1.1
+		 */
+		private static $instance;
 
-			self::defineConstants();
-			self::loadDependencies();
+		/**
+		 * @var string The absolute path this this file.
+		 *
+		 * @access private
+		 * @since 1.1
+		 */
+		private static $file = '';
 
-			// register_activation_hook( CNIL_BASE_NAME . '/connections_income_levels.php', array( __CLASS__, 'activate' ) );
-			// register_deactivation_hook( CNIL_BASE_NAME . '/connections_income_levels.php', array( __CLASS__, 'deactivate' ) );
+		/**
+		 * @var string The URL to the plugin's folder.
+		 *
+		 * @access private
+		 * @since 1.1
+		 */
+		private static $url = '';
 
-			/*
-			 * Load translation. NOTE: This should be ran on the init action hook because
-			 * function calls for translatable strings, like __() or _e(), execute before
-			 * the language files are loaded will not be loaded.
-			 *
-			 * NOTE: Any portion of the plugin w/ translatable strings should be bound to the init action hook or later.
-			 */
-			add_action( 'init', array( __CLASS__ , 'loadTextdomain' ) );
+		/**
+		 * @var string The absolute path to this plugin's folder.
+		 *
+		 * @access private
+		 * @since 1.1
+		 */
+		private static $path = '';
+
+		/**
+		 * @var string The basename of the plugin.
+		 *
+		 * @access private
+		 * @since 1.0
+		 */
+		private static $basename = '';
+
+		public function __construct() { /* Do nothing here */ }
+
+		/**
+		 * @access public
+		 * @since  1.1
+		 *
+		 * @return Connections_Income_Levels
+		 */
+		public static function instance() {
+
+			if ( ! isset( self::$instance ) && ! ( self::$instance instanceof Connections_Income_Levels ) ) {
+
+				self::$instance = $self = new self;
+
+				self::$file       = __FILE__;
+				self::$url        = plugin_dir_url( self::$file );
+				self::$path       = plugin_dir_path( self::$file );
+				self::$basename   = plugin_basename( self::$file );
+
+				self::loadDependencies();
+				self::hooks();
+
+				/**
+				 * This should run on the `plugins_loaded` action hook. Since the extension loads on the
+				 * `plugins_loaded` action hook, load immediately.
+				 */
+				cnText_Domain::register(
+					'connections_income_levels',
+					self::$basename,
+					'load'
+				);
+
+				// register_activation_hook( CNIL_BASE_NAME . '/connections_education_levels.php', array( __CLASS__, 'activate' ) );
+				// register_deactivation_hook( CNIL_BASE_NAME . '/connections_education_levels.php', array( __CLASS__, 'deactivate' ) );
+			}
+
+			return self::$instance;
+		}
+
+		/**
+		 * Gets the basename of a plugin.
+		 *
+		 * @access public
+		 * @since  1.1
+		 *
+		 * @return string
+		 */
+		public function pluginBasename() {
+
+			return self::$basename;
+		}
+
+		/**
+		 * Get the absolute directory path (with trailing slash) for the plugin.
+		 *
+		 * @access public
+		 * @since  1.1
+		 *
+		 * @return string
+		 */
+		public function pluginPath() {
+
+			return self::$path;
+		}
+
+		/**
+		 * Get the URL directory path (with trailing slash) for the plugin.
+		 *
+		 * @access public
+		 * @since  1.1
+		 *
+		 * @return string
+		 */
+		public function pluginURL() {
+
+			return self::$url;
+		}
+
+		/**
+		 * Register all the hooks that makes this thing run.
+		 *
+		 * @access private
+		 * @since  1.1
+		 */
+		private static function hooks() {
 
 			// Register the metabox and fields.
 			add_action( 'cn_metabox', array( __CLASS__, 'registerMetabox') );
@@ -65,23 +174,6 @@ if ( ! class_exists('Connections_Income_Levels') ) {
 		}
 
 		/**
-		 * Define the constants.
-		 *
-		 * @access  private
-		 * @static
-		 * @since  1.0
-		 * @return void
-		 */
-		private static function defineConstants() {
-
-			define( 'CNIL_CURRENT_VERSION', '1.0.2' );
-			define( 'CNIL_DIR_NAME', plugin_basename( dirname( __FILE__ ) ) );
-			define( 'CNIL_BASE_NAME', plugin_basename( __FILE__ ) );
-			define( 'CNIL_PATH', plugin_dir_path( __FILE__ ) );
-			define( 'CNIL_URL', plugin_dir_url( __FILE__ ) );
-		}
-
-		/**
 		 * The widget.
 		 *
 		 * @access private
@@ -91,50 +183,12 @@ if ( ! class_exists('Connections_Income_Levels') ) {
 		 */
 		private static function loadDependencies() {
 
-			require_once( CNIL_PATH . 'includes/class.widgets.php' );
+			require_once( Connections_Income_Levels()->pluginPath() . 'includes/class.widgets.php' );
 		}
 
 		public static function activate() {}
 
 		public static function deactivate() {}
-
-		/**
-		 * Load the plugin translation.
-		 *
-		 * Credit: Adapted from Ninja Forms / Easy Digital Downloads.
-		 *
-		 * @access private
-		 * @since  1.0
-		 * @static
-		 * @uses   apply_filters()
-		 * @uses   get_locale()
-		 * @uses   load_textdomain()
-		 * @uses   load_plugin_textdomain()
-		 * @return void
-		 */
-		public static function loadTextdomain() {
-
-			// Plugin's unique textdomain string.
-			$textdomain = 'connections_income_levels';
-
-			// Filter for the plugin languages folder.
-			$languagesDirectory = apply_filters( 'connections_income_level_lang_dir', CNIL_DIR_NAME . '/languages/' );
-
-			// The 'plugin_locale' filter is also used by default in load_plugin_textdomain().
-			$locale = apply_filters( 'plugin_locale', get_locale(), $textdomain );
-
-			// Filter for WordPress languages directory.
-			$wpLanguagesDirectory = apply_filters(
-				'connections_income_level_wp_lang_dir',
-				WP_LANG_DIR . '/connections-income-levels/' . sprintf( '%1$s-%2$s.mo', $textdomain, $locale )
-			);
-
-			// Translations: First, look in WordPress' "languages" folder = custom & update-secure!
-			load_textdomain( $textdomain, $wpLanguagesDirectory );
-
-			// Translations: Secondly, look in plugin's "languages" folder = default.
-			load_plugin_textdomain( $textdomain, FALSE, $languagesDirectory );
-		}
 
 		/**
 		 * Defines the income level options.
@@ -300,7 +354,7 @@ if ( ! class_exists('Connections_Income_Levels') ) {
 
 			if ( class_exists('connectionsLoad') ) {
 
-					return new Connections_Income_Levels();
+					return Connections_Income_Levels::instance();
 
 			} else {
 
