@@ -299,7 +299,7 @@ if ( ! class_exists('Connections_Income_Levels') ) {
 	 * @access public
 	 * @since 1.0
 	 *
-	 * @return mixed object | bool
+	 * @return Connections_Income_Levels|false
 	 */
 	function Connections_Income_Levels() {
 
