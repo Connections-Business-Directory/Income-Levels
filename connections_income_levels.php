@@ -2,20 +2,20 @@
 /**
  * An extension for the Connections plugin which adds a metabox for income levels.
  *
- * @package   Connections Income Levels
+ * @package   Connections Business Directory Extension - Income Level
  * @category  Extension
  * @author    Steven A. Zahm
  * @license   GPL-2.0+
- * @link      http://connections-pro.com
- * @copyright 2014 Steven A. Zahm
+ * @link      https://connections-pro.com
+ * @copyright 2019 Steven A. Zahm
  *
  * @wordpress-plugin
- * Plugin Name:       Connections Incomes Levels
- * Plugin URI:        http://connections-pro.com
+ * Plugin Name:       Connections Business Directory Extension - Income Level
+ * Plugin URI:        https://connections-pro.com/add-on/income-level/
  * Description:       An extension for the Connections plugin which adds a metabox for income levels.
  * Version:           1.0.2
  * Author:            Steven A. Zahm
- * Author URI:        http://connections-pro.com
+ * Author URI:        https://connections-pro.com
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       connections_income_levels
