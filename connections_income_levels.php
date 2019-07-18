@@ -105,8 +105,8 @@ if ( ! class_exists('Connections_Income_Levels') ) {
 					'load'
 				);
 
-				// register_activation_hook( CNIL_BASE_NAME . '/connections_education_levels.php', array( __CLASS__, 'activate' ) );
-				// register_deactivation_hook( CNIL_BASE_NAME . '/connections_education_levels.php', array( __CLASS__, 'deactivate' ) );
+				// register_activation_hook( CNIL_BASE_NAME . '/connections_income_levels.php', array( __CLASS__, 'activate' ) );
+				// register_deactivation_hook( CNIL_BASE_NAME . '/connections_income_levels.php', array( __CLASS__, 'deactivate' ) );
 			}
 
 			return self::$instance;
