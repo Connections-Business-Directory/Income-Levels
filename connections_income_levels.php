@@ -31,6 +31,8 @@ if ( ! class_exists('Connections_Income_Levels') ) {
 
 	class Connections_Income_Levels {
 
+		const VERSION = '1.0.2';
+
 		public function __construct() {
 
 			self::defineConstants();
