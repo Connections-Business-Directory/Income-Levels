@@ -449,7 +449,7 @@ if ( ! class_exists('Connections_Income_Levels') ) {
 		 */
 		public static function settingsOption( $blocks ) {
 
-			$blocks['income_level'] = 'Income Level';
+			$blocks['income_level'] =  __( 'Income Level', 'connections_income_levels' );
 
 			return $blocks;
 		}
