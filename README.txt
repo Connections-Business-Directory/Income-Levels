@@ -66,6 +66,14 @@ None yet....
 
 == Changelog ==
 
+= 2.0.1 05/06/2021 =
+* BUG: Add missing translation string.
+* OTHER: Change link from `http` to `https`.
+* OTHER: Update copyright year.
+* DEV: Correct code alignment.
+* DEV: phpDoc correction.
+* DEV: Update README.txt plugin header.
+
 = 2.0 07/18/2019 =
 * FEATURE: Add support for CSV Import and Export of Education Level.
 * TWEAK: Refactor plugin in singleton pattern.
@@ -92,3 +100,6 @@ Initial release.
 
 = 2.0 =
 It is recommended to backup before updating. Requires WordPress >= 4.7.12 and PHP >= 5.6.20 PHP version >= 7.1 recommended.
+
+= 2.0.1 =
+It is recommended to backup before updating. Requires WordPress >= 5.1 and PHP >= 5.6.20 PHP version >= 7.2 recommended.
