@@ -455,18 +455,19 @@ if ( ! class_exists('Connections_Income_Levels') ) {
 		}
 
 		/**
+		 * Callback for the `cn_output_meta_field-income_level` action.
+		 *
 		 * Renders the Income Levels content block.
 		 *
-		 * Called by the cn_meta_output_field-income_level action in cnOutput->getMetaBlock().
+		 * @internal
+		 * @since 1.0
 		 *
-		 * @access private
-		 * @since  1.0
-
-		 * @param  string $id    The field id.
-		 * @param  array  $value The income level ID.
-		 * @param  array  $atts  The shortcode atts array passed from the calling action.
+		 * @param string $id           The field id.
+		 * @param array  $value        The income level ID.
+		 * @param cnEntry_HTML $object Instance of the cnEntry object.
+		 * @param array  $atts         The shortcode atts array passed from the calling action.
 		 */
-		public static function block( $id, $value, $object = NULL, $atts ) {
+		public static function block( $id, $value, $object, $atts ) {
 
 			if ( $income = self::income( $value ) ) {
 
